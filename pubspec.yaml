@@ -29,16 +29,8 @@ flutter:
   # adding or updating assets for this project.
   plugin:
     platforms:
-      android:
-        package: solutions.gm5.synced_text_form_field.synced_text_form_field
-        pluginClass: SyncedTextFormFieldPlugin
-      ios:
-        pluginClass: SyncedTextFormFieldPlugin
-      macos:
-        pluginClass: SyncedTextFormFieldPlugin
-      web:
-        pluginClass: SyncedTextFormFieldPlugin
-
+      some_platform:
+        pluginClass: somePluginClass
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
