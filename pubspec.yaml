@@ -37,8 +37,7 @@ flutter:
       macos:
         pluginClass: SyncedTextFormFieldPlugin
       web:
-        pluginClass: SyncedTextFormFieldWeb
-        fileName: synced_text_form_field_web.dart
+        pluginClass: SyncedTextFormFieldPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
