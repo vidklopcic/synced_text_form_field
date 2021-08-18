@@ -39,14 +39,14 @@ export 'package:flutter/services.dart' show SmartQuotesType, SmartDashesType;
 ///
 /// {@tool snippet}
 ///
-/// Creates a [TextFormField] with an [InputDecoration] and validator function.
+/// Creates a [SyncedTextFormField] with an [InputDecoration] and validator function.
 ///
 /// ![If the user enters valid text, the TextField appears normally without any warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
 ///
 /// ![If the user enters invalid text, the error message returned from the validator function is displayed in dark red underneath the input](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
 ///
 /// ```dart
-/// TextFormField(
+/// SyncedTextFormField(
 ///   decoration: const InputDecoration(
 ///     icon: Icon(Icons.person),
 ///     hintText: 'What do people call you?',
@@ -93,7 +93,7 @@ export 'package:flutter/services.dart' show SmartQuotesType, SmartDashesType;
 ///                   padding: const EdgeInsets.all(8.0),
 ///                   child: ConstrainedBox(
 ///                     constraints: BoxConstraints.tight(const Size(200, 50)),
-///                     child: TextFormField(
+///                     child: SyncedTextFormField(
 ///                       onSaved: (String? value) {
 ///                         print('Value for field $index saved as "$value"');
 ///                       },
@@ -119,7 +119,7 @@ export 'package:flutter/services.dart' show SmartQuotesType, SmartDashesType;
 ///  * [InputDecorator], which shows the labels and other visual elements that
 ///    surround the actual text editing widget.
 ///  * Learn how to use a [TextEditingController] in one of our [cookbook recipes](https://flutter.dev/docs/cookbook/forms/text-field-changes#2-use-a-texteditingcontroller).
-class TextFormField extends FormField<String> {
+class SyncedTextFormField extends FormField<String> {
   /// Creates a [FormField] that contains a [TextField].
   ///
   /// When a [controller] is specified, [initialValue] must be null (the
@@ -129,7 +129,7 @@ class TextFormField extends FormField<String> {
   ///
   /// For documentation about the various parameters, see the [TextField] class
   /// and [new TextField], the constructor.
-  TextFormField({
+  SyncedTextFormField({
     Key? key,
     this.controller,
     String? initialValue,
@@ -238,7 +238,7 @@ class TextFormField extends FormField<String> {
               ? AutovalidateMode.always
               : (autovalidateMode ?? AutovalidateMode.disabled),
           builder: (FormFieldState<String> field) {
-            final _TextFormFieldState state = field as _TextFormFieldState;
+            final _SyncedTextFormFieldState state = field as _SyncedTextFormFieldState;
             final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration())
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
             void onChangedHandler(String value) {
@@ -312,16 +312,16 @@ class TextFormField extends FormField<String> {
   final TextEditingController? controller;
 
   @override
-  FormFieldState<String> createState() => _TextFormFieldState();
+  FormFieldState<String> createState() => _SyncedTextFormFieldState();
 }
 
-class _TextFormFieldState extends FormFieldState<String> {
+class _SyncedTextFormFieldState extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
 
   TextEditingController get _effectiveController => widget.controller ?? _controller!.value;
 
   @override
-  TextFormField get widget => super.widget as TextFormField;
+  SyncedTextFormField get widget => super.widget as SyncedTextFormField;
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
@@ -361,7 +361,7 @@ class _TextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(TextFormField oldWidget) {
+  void didUpdateWidget(SyncedTextFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
     // the only change
     if (widget.initialValue != oldWidget.initialValue) {
