@@ -365,7 +365,7 @@ class _SyncedTextFormFieldState extends FormFieldState<String> {
     super.didUpdateWidget(oldWidget);
     // the only change
     if (widget.initialValue != oldWidget.initialValue) {
-      setValue(widget.initialValue);
+      _effectiveController.text = widget.initialValue ?? '';
     }
     // change end
 
